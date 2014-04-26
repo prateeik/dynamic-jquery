@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dynamic-Add-Remove-Jquery</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
+<body>
+<div id='TextBoxesGroup'>
+ <div id="TextBoxDiv1">
+ <label>Textbox #1 : </label><input type='text' id='textbox1' name='textbox1' />
+ </div>
+</div>
+<input type='button' value='Add Button' id='addButton' />
+<input type='button' value='Remove Button' id='removeButton' />
+<script>
+$(window).load(function(){
+$(document).ready(function () {
+ 	var counter = 2;
+	$("#addButton").click(function () {
+            if (counter > 2) {
+                alert("Only 2 textboxes allowed");
+                return false;
+            }
+            $('<div/>',{'id':'TextBoxDiv' + counter}).html(
+              $('<label/>').html( 'Textbox #' + counter + ' : ' )
+            )
+            .append( $('<input type="text">').attr({'id':'textbox' + counter,'name':'textbox' + counter}) )
+            .appendTo( '#TextBoxesGroup' )       
+            counter++;
+        });
+
+        $("#removeButton").click(function () {
+            if (counter == 1) {
+                alert("No more textbox to remove");
+                return false;
+            }
+            counter--;
+            $("#TextBoxDiv" + counter).remove();
+        });
+});
+});
+</script>
+</body>
+</html>
